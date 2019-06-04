@@ -104,6 +104,6 @@ class Car{
 	}
 }
 new Car({
-	url:"http://localhost/shop/php/one.json",
+	url:"http://localhost/shop/public/one.json",
 	tbody:$(".tab").children("tbody")
 })

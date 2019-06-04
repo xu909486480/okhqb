@@ -135,7 +135,7 @@ class Banner{
 		this.iprev = this.img.length-1;
 		this.oli = options.oli;
 		this.init()
-//		this.play()
+		this.play()
 		this.autoplay()
 	}
 	init(){
@@ -243,7 +243,7 @@ class Banner{
 		
 	})
 
-//购物车------------------------------------------
+//添加购物车------------------------------------------
 class Shop{
 	constructor(options){
 		this.url = options.url;
@@ -320,9 +320,39 @@ class Shop{
 	}
 }
 new Shop({
-	url:"http://localhost/shop/php/one.json",
+	url:"http://localhost/shop/public/one.json",
 	c3:$(".main-t").children(".c3").children("ul")
 })
 	
-
-
+//回到顶部
+class Back{
+	constructor(options){
+		this.goback = options.goback
+		this.scrollT = document.documentElement.scrollTop;
+		console.log(this.scrollT)
+		this.init()
+	}
+	init(){
+		var timer;
+		this.goback.click(function(){
+			if(timer) clearInterval(timer);
+			timer = setInterval(()=>{
+				if(document.documentElement.scrollTop <= 0){
+					clearInterval(timer)
+				}else{
+					document.documentElement.scrollTop -= 200;
+				}
+			},30)
+		})
+//		this.goback.click(function(){
+//			this.goback.animate({
+//					scrollTop:-200
+//				})
+//			})
+	
+	}
+}
+new Back({
+	goback:$(".side1").find(".r5"),
+	
+})
