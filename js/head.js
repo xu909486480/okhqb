@@ -1,3 +1,44 @@
+class Cookie{
+	constructor(options){
+		this.info1 = options.info1;
+		this.info2 = options.info2;
+		this.logout = options.loginout;
+		this.init()
+		this.addEvent()
+	}
+	init(){
+		this.user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : [];
+		for(var i=0;i<this.user.length;i++){
+			if(this.user[i].onoff == 1){
+				this.info1[0].style.display = "none"
+				this.info2[0].style.display = "block"
+				this.info2.innerHTML = this.user[i].u
+				this.name = this.user[i].u
+				return;
+			}
+		}
+	}
+	addEvent(){
+		this.logout.click(()=>{
+			for(var i=0;i<this.user.length;i++){
+				if(this.name == this.user[i].u){
+					this.user[i].onoff = 0
+					this.info1[0].style.display = "block";
+					this.info2[0].style.display = "none";
+					localStorage.setItem("user",JSON.stringify(this.user))
+					return;
+				}
+			}
+		})
+	}
+}
+
+new Cookie({
+	info1:$(".top-l"),
+	info2:$(".top-c"),
+	loginout:$(".top-c").children("i")
+})
+
 class Head{
 		constructor(options){
 			this.oa = options.oa;
@@ -19,8 +60,72 @@ new Head({
 		oa:$(".top-r").children("ul").children("li"),
 		odd:$(".banner-l").children("dl").children("dd")
 	})
-//头部的JS
-//banner图JS
+//头部的JS------------------------------------------
+
+//商城搜索框------------------------------------------
+class Search{
+	constructor(options){
+		this.url = options.url;
+		this.txt = options.txt;
+		this.oul = options.oul;
+		this.oli = options.oli;
+		this.init()
+	}
+	init(){
+		var that = this;
+		this.txt[0].oninput = function(){
+			that.value = this.value
+			that.search()
+			
+		}
+		this.txt.click(function(){
+//			var e = eve || window.event;
+//			var code = e.keyCode || e.which
+//			console.log(code)
+			that.oul[0].style.display = "block"
+//			if(){
+//				
+//			}
+		})
+		this.txt.blur(function(){
+			that.oul[0].style.display = "none"
+		})
+	}	
+	search(){
+		var that = this;
+		$.ajax({
+			url:this.url,
+			data:{
+				wd:this.value
+			},
+			success:function(res){
+				that.res = res;
+				that.display();
+			},
+			dataType:"jsonp",
+			jsonp:"cb"
+		});
+	}
+	display(){
+//		console.log(this.res.s)
+		var str = "";
+		for(var i=0;i<this.res.s.length;i++){
+			str += `<li><a href="#">${this.res.s[i]}</a></li>`
+		}
+		this.oul[0].innerHTML = str;
+	}
+	
+}
+
+new Search({
+	url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+	txt:$(".header-c2").children(".t").children(".txt1"),
+	oul:$(".header-c2").children(".t").children(".list"),
+	oli:$(".header-c2").children(".t").children(".list").children("li")
+})
+
+
+//banner图JS------------------------------------------
 class Banner{
 	constructor(options){
 		this.img = options.img;
@@ -30,7 +135,8 @@ class Banner{
 		this.iprev = this.img.length-1;
 		this.oli = options.oli;
 		this.init()
-		this.play()
+//		this.play()
+		this.autoplay()
 	}
 	init(){
 		var that = this;
@@ -40,6 +146,7 @@ class Banner{
 		this.right.click(function(){
 			that.change("r")
 		})
+		
 		
 	}
 	change(type){
@@ -63,11 +170,35 @@ class Banner{
 			this.move(-1)
 		}
 	}
+	//点击左右剪头移动banner图------------------------------------------
+	move(type){
+		this.img.eq(this.iprev).css({left:0})
+		.stop().animate({left:1903*type})
+		this.img.eq(this.index).css({left:-1903*type})
+		.stop().animate({left:0})
+	}
+	//自动播放
+	autoplay(){
+		var that = this;
+		let Timer;
+		Timer = setInterval(()=>{
+			this.change("r")
+		},2000)
+		this.img.hover(function(){
+			clearInterval(Timer)
+		},function(){
+			Timer = setInterval(()=>{
+				that.change("r")
+			},2000)
+		})
+	}
+	//小圆点li------------------------------------------
 	play(){
 		this.oli.click(function(){
+//			console.log($(this).index())
 		if($(this).index() > this.index){
             move(1,this.index,$(this).index())
-       		}
+       	}
         if($(this).index() < this.index){
             move(-1,this.index,$(this).index())
         	}
@@ -75,29 +206,24 @@ class Banner{
                 this.index = $(this).index();
 		})
 	}
-//		let move = function(direct,iPrev,iNow){
-//              items.eq(iPrev).css({
+	
+//	let move = function(type,img,index){
+//              items.eq(img).css({
 //                  left:0
 //              }).stop().animate({
-//                  left:-items.eq(0).width() * direct
-//              },moveTime).end().eq(iNow).css({
-//                  left:items.eq(0).width() * direct
+//                  left:-items.eq(0).width() * type
+//              },moveTime).end().eq(index).css({
+//                  left:items.eq(0).width() * type
 //              }).stop().animate({
 //                  left:0
 //              },moveTime)
-//          }
+//          }		
 //		var str = "";
 //		for(var i=0;i<this.img;i++){
 //			str += `<li>${i+1}<a href="#"></a></li>`
 //		}
 //      $(".banner-r").append($("<ul class='small'>").html(str));
-		
-	move(type){
-		this.img.eq(this.iprev).css({left:0})
-		.stop().animate({left:1903*type})
-		this.img.eq(this.index).css({left:-1903*type})
-		.stop().animate({left:0})
-	}
+//		
 //		if($(this).index() > this.index){
 //          move(1,this.index,$(this).index())
 //     		}
@@ -105,12 +231,9 @@ class Banner{
 //          move(-1,this.index,$(this).index())
 //      	}
 //		this.oli.eq(this.index).css({background:""}).end().eq($(this).index()).css({background:"skyblue"})
-
-                // L7.点击移动之后，将点击的设置成下一次的当前
 //              index = $(this).index();
 	
 }
-	
 	new Banner({
 		img:$(".big").children("li"),
 		left:$(".banner-c").children(".left"),
@@ -119,16 +242,14 @@ class Banner{
 		oli:$(".small").children("li")
 		
 	})
-	
+
+//购物车------------------------------------------
 class Shop{
 	constructor(options){
 		this.url = options.url;
-		
-		
-		
+		this.c3 = options.c3;
+		this.addEvent()
 		this.ajax()
-		
-		
 	}
 	ajax(){
 		var that = this;
@@ -137,14 +258,14 @@ class Shop{
 			success:function(res){
 				that.res = res;
 				that.display()
-				
 			}
 		});
 	}
 	display(){
+//		console.log(this.res)
 		var str = "";
 		for(var i=0;i<this.res.length;i++){
-			str += `<li>
+			str += `<li index="${this.res[i].goodsid}">
 						<div class="img">
 							<a href="#"><img src="${this.res[i].src}"></a>
 						</div>
@@ -152,23 +273,56 @@ class Shop{
 							<p>
 								<span>${this.res[i].price}</span>
 								<s>${this.res[i].xuni}</s>
+								<i class="set">加入购物车</i>
 							</p>
 							<a href="#">${this.res[i].name}</a>
 						</div>	
 					</li>`
 		}
-		$(".main-t").children(".c3").append("<ul>")
+//		$(".main-t").children(".c3").append("<ul>")
 		$(".main-t").children(".c3").children("ul").html(str)
 	}
-	
-	
-	
-	
+	addEvent(){
+		var that = this;
+		this.c3.on("click",function(eve){
+			var e = eve || window.event;
+			var target = e.target || e.srcElement;
+			if(target.className == "set"){
+				that.id = target.parentNode.parentNode.parentNode.getAttribute("index")
+				that.setCookie()
+			}
+		})
+	}
+	setCookie(){
+		this.goods = localStorage.getItem("shangpin");
+		if(this.goods){
+			var onoff = true;
+			this.goods = JSON.parse(localStorage.getItem("shangpin"))
+			for(var i=0;i<this.goods.length;i++){
+				if(this.goods[i].id == this.id){
+					this.goods[i].num++
+					onoff = false;
+				}
+			}
+			if(onoff){
+				this.goods.push({
+					id:this.id,
+					num:1
+				})
+			}
+		}else{
+			this.goods = [{
+				id:this.id,
+				num:1
+			}]
+		}
+		localStorage.setItem("shangpin",JSON.stringify(this.goods))
+	}
 }
 new Shop({
 	url:"http://localhost/shop/php/one.json",
-	
+	c3:$(".main-t").children(".c3").children("ul")
 })
 	
-	
+
 
