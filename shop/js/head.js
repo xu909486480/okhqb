@@ -1,3 +1,25 @@
+//图片懒加载
+onscroll = function(){
+	new Ljz({
+		aimg:document.querySelectorAll("img"),
+		clientH:document.documentElement.clientHeight,
+		scrollT:document.documentElement.scrollTop
+	})
+}
+class Ljz{
+	constructor(options){
+		this.aimg = options.aimg
+		this.clientH = options.clientH
+		this.scrollT = options.scrollT
+		for(var i=0;i<this.aimg.length;i++){
+			if(this.aimg[i].src != "") continue;
+			if(this.aimg[i].offsetTop < this.clientH + this.scrollT){
+				this.aimg[i].src = this.aimg[i].getAttribute("data-src")
+			}
+		}
+	}
+	
+}
 class Cookie{
 	constructor(options){
 		this.info1 = options.info1;
@@ -33,6 +55,7 @@ class Cookie{
 	}
 }
 
+//头部的JS------------------------------------------
 new Cookie({
 	info1:$(".top-l"),
 	info2:$(".top-c"),
@@ -60,7 +83,7 @@ new Head({
 		oa:$(".top-r").children("ul").children("li"),
 		odd:$(".banner-l").children("dl").children("dd")
 	})
-//头部的JS------------------------------------------
+
 
 //商城搜索框------------------------------------------
 class Search{
@@ -329,7 +352,7 @@ class Back{
 	constructor(options){
 		this.goback = options.goback
 		this.scrollT = document.documentElement.scrollTop;
-		console.log(this.scrollT)
+//		console.log(this.scrollT)
 		this.init()
 	}
 	init(){
@@ -356,3 +379,6 @@ new Back({
 	goback:$(".side1").find(".r5"),
 	
 })
+
+
+
