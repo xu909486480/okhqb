@@ -296,7 +296,7 @@
 #link ul li:nth-child(1){background:#e10808;}
 #link ul li:nth-child(1) a{color:#fff;}
 
-#link ul li:nth-child(4){height:148px;background:#f1f1f1;}
+#link ul li:nth-child(4){height:148px;}
 #link ul li .link1{}
 #link ul li .link1 p{color:#000;}
 #link ul li .link1 p:nth-child(1){color:#f00;padding-top:10px;}

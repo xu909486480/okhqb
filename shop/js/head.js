@@ -18,7 +18,6 @@ class Ljz{
 			}
 		}
 	}
-	
 }
 class Cookie{
 	constructor(options){
@@ -71,8 +70,12 @@ class Head{
 			this.nav()
 		}
 		top(){
-			this.oa.mouseover(function(){$(".top-r").children("ul").children("li").children("div").eq($(this).index()).css({display:"block"})})
-			this.oa.mouseout(function(){$(".top-r").children("ul").children("li").children("div").eq($(this).index()).css({display:"none"})})
+			this.oa.mouseover(function(){$(".top-r")
+			.children("ul").children("li").children("div")
+			.eq($(this).index()).css({display:"block"})})
+			this.oa.mouseout(function(){$(".top-r").children("ul")
+			.children("li").children("div").eq($(this).index())
+			.css({display:"none"})})
 		}
 		nav(){
 			this.odd.mouseover(function(){$(this).children("div").css({display:"block"})})
@@ -351,34 +354,70 @@ new Shop({
 class Back{
 	constructor(options){
 		this.goback = options.goback
-		this.scrollT = document.documentElement.scrollTop;
 //		console.log(this.scrollT)
 		this.init()
 	}
 	init(){
-		var timer;
 		this.goback.click(function(){
-			if(timer) clearInterval(timer);
-			timer = setInterval(()=>{
-				if(document.documentElement.scrollTop <= 0){
-					clearInterval(timer)
-				}else{
-					document.documentElement.scrollTop -= 200;
-				}
-			},30)
+			$("html").stop().animate({
+				scrollTop:0
+			})
 		})
-//		this.goback.click(function(){
-//			this.goback.animate({
-//					scrollTop:-200
-//				})
-//			})
-	
 	}
 }
 new Back({
 	goback:$(".side1").find(".r5"),
-	
 })
 
+//楼层移动效果
+class Floor{
+	constructor(options){
+		this.oli = options.oli;
+		this.scrollT = options.scrollT
+		this.clientT = options.clientT
+		console.log($("#link").find(".active"))
+		this.init()
+//		console.log(this.scrollT)
+//		console.log(this.clientT)
+	}
+	init(){
+		var that = this;
+		this.oli.click(function(){
+//			console.log($(this).index())
+			switch($(this).index()){
+				case 0 : $("html").stop().animate({scrollTop:0})
+					$(this).css({background:"#e10808"})
+					.siblings().css({background:"#fff"})
+					$(this).children().css({color:"#fff"})
+					.parent().siblings().children().css({color:"#666"})
+				break;
+				case 1 : $("html").stop().animate({scrollTop:700})
+					$(this).css({background:"#e10808"})
+					.siblings().css({background:"#fff"})
+					$(this).children().css({color:"#fff"})
+					.parent().siblings().children().css({color:"#666"})
+				break;
+				case 2 : $("html").stop().animate({scrollTop:2044})
+					$(this).css({background:"#e10808"})
+					.siblings().css({background:"#fff"})
+					$(this).children().css({color:"#fff"})
+					.parent().siblings().children().css({color:"#666"})
+				break;
+				case 4 : $("html").stop().animate({scrollTop:0})
+//					$("#link").find(".active").css({
+//						background:"#e10808"
+//					}).siblings().css({background:"#fff"})
+//					$("#link").find(".active").css({color:"#fff"})
+//					.parent().siblings().children().css({color:"#666"})
+			}
+		})
 
+	}
+}
+
+new Floor({
+	oli:$("#link").children("ul").children("li"),
+	scrollT:document.documentElement.scrollTop,
+	clientT:document.documentElement.clientTop
+})
 
