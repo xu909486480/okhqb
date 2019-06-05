@@ -293,7 +293,7 @@ class Shop{
 		for(var i=0;i<this.res.length;i++){
 			str += `<li index="${this.res[i].goodsid}">
 						<div class="img">
-							<a href="#"><img src="${this.res[i].src}"></a>
+							<a href="http://localhost/shop/car/car.html"><img src="${this.res[i].src}"></a>
 						</div>
 						<div class="msg">
 							<p>
@@ -301,7 +301,7 @@ class Shop{
 								<s>${this.res[i].xuni}</s>
 								<i class="set">加入购物车</i>
 							</p>
-							<a href="#">${this.res[i].name}</a>
+							<a href="http://localhost/shop/car/car.html">${this.res[i].name}</a>
 						</div>	
 					</li>`
 		}
@@ -375,7 +375,7 @@ class Floor{
 		this.oli = options.oli;
 		this.scrollT = options.scrollT
 		this.clientT = options.clientT
-		console.log($("#link").find(".active"))
+//		console.log($("#link").find(".active"))
 		this.init()
 //		console.log(this.scrollT)
 //		console.log(this.clientT)
