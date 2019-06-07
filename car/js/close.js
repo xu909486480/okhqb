@@ -1,6 +1,7 @@
 class Car{
 	constructor(options){
 		this.url = options.url;
+		this.url1 = options.url1;
 		this.tbody = options.tbody;
 		this.init()
 		this.addEvent()
@@ -12,17 +13,58 @@ class Car{
 			success:function(res){
 				that.res = res
 				that.getCookie()
-//				console.log(that.res)
 				that.display()
 			}
 		});
+		
 	}
 	getCookie(){
 		this.goods = JSON.parse(localStorage.getItem("shangpin"))
-//		console.log(this.goods)
 	}
 	display(){
-//		console.log(this.res)
+		var str = "";
+		for(var i=0;i<this.res.length;i++){
+			for(var j=0;j<this.goods.length;j++){
+				if(this.res[i].goodsid == this.goods[j].id){
+		str += `<tr index="${this.res[i].goodsid}">
+					<td>
+						<div class="l">
+							<input type="checkbox">
+							<a href="#"><img src="${this.res[i].src}"></a>
+							<p>
+								<a href="#">${this.res[i].name}</a>
+								<span>32G 金色</span>
+							</p>
+						</div>
+					</td>
+					<td>
+						<div class="c1">
+							<p>${this.res[i].price}</p>
+							<a href="#">特价</a>
+						</div>
+					</td>
+					<td>
+						<div class="c2">
+							<input type="number" value="${this.goods[j].num}" min="1"/>
+						</div>
+					</td>
+					<td>
+						<div class="c3">
+							<span>${this.res[i].price}</span>
+						</div>
+					</td>
+					<td>
+						<div class="r">
+							<img src="images/icon4.png" class="delete">
+						</div>
+					</td>
+				</tr>`
+				}
+			}
+		}
+		this.tbody.html(str)
+	}
+	display(){
 		var str = "";
 		for(var i=0;i<this.res.length;i++){
 			for(var j=0;j<this.goods.length;j++){
@@ -105,5 +147,6 @@ class Car{
 }
 new Car({
 	url:"http://localhost/shop/public/one.json",
+	url1:"http://localhost/shop/public/one1.json",
 	tbody:$(".tab").children("tbody")
 })

@@ -1,3 +1,37 @@
+class Xq{
+	constructor(options){
+		this.url = options.url;
+		this.init()
+		
+	}
+	init(){
+		let that = this;
+		$.ajax({
+			url:this.url,
+			success:function(res){
+				that.res = res
+				that.getCookie()
+				that.display()
+			}
+		});
+		
+	}
+	getCookie(){
+		this.goods = JSON.parse(localStorage.getItem("shangpin"))
+	}
+	display(){
+		var str = ""
+//		for(){
+//			
+//		}
+	}
+}
+
+//new Xq({
+//	url:"http://localhost/shop/public/one.json",
+//
+//})
+
 class Fangda{
 	constructor(options){
 		this.xiao = options.xiao;

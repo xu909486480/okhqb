@@ -136,6 +136,7 @@
 
 .main-t .c2 div ul li p{margin:20px 0 6px 0;font-size: 14px;color:#e85508;margin-left:10px;}
 .main-t .c2 div ul li p s{color:#9b9b9b;margin-left:8px;}
+.main-t .c2 div ul li p i{display:inline-block;background:#ff4400;color:#fff;line-height: 20px;cursor: pointer;float:right;margin-right:6px;}
 .main-t .c2 div ul li a{display:inline-block;color:#232323;margin-left:10px;width:217px;}
 .main-t .c2 div ul li a:hover{color:#e10808;}
 .main-t .c2 .main3{float:left;}
@@ -156,7 +157,7 @@
 .main-t .c3 ul li .msg p s{color:#9b9b9b;margin-left:8px;}
 .main-t .c3 ul li .msg a{display:block;color:#232323;width:217px;word-break:break-all;line-height: 20px;overflow: hidden;height:40px;}
 .main-t .c3 ul li .msg a:hover{color:#e10808;}
-.main-t .c3 ul li .msg p i{display:inline-block;background: skyblue;color:darkslategray;line-height: 20px;}
+.main-t .c3 ul li .msg p i{display:inline-block;background:#ff4400;color:#fff;line-height: 20px;cursor: pointer;float:right;margin-top:4px;}
 
 .main-c {width:1200px;height:120px;background:#f1f1f1;}
 .main-c ul{display:flex;}
@@ -195,6 +196,7 @@
 .main-b ul li .t1 p{padding:0 10px;}
 .main-b ul li .t1 p span{font-size:16px;color:#e10808;}
 .main-b ul li .t1 p s{color:#9b9b9b;}
+.main-b ul li .t1 p i{display:inline-block;background:#ff4400;color:#fff;line-height: 20px;cursor: pointer;float:right;}
 
 .main-b ul li .t1 b{display:block;line-height:20px;padding:0 10px;width:217px;word-break: break-all;height:40px;overflow:hidden;}
 
@@ -203,6 +205,7 @@
 .main-b ul li .b1 p{padding:0 10px;}
 .main-b ul li .b1 p span{font-size:16px;color:#e10808;}
 .main-b ul li .b1 p s{color:#9b9b9b;}
+.main-b ul li .b1 p i{display:inline-block;background:#ff4400;color:#fff;line-height: 20px;cursor: pointer;float:right;}
 
 .main-b ul li .b1 b{display:block;line-height:20px;padding:0 10px;width:217px;word-break: break-all;height:40px;overflow:hidden;}
 
@@ -210,7 +213,7 @@
 .main-b .main-b-b ul{display:flex;flex-wrap: wrap;}
 
 .main-b .main-b-b ul li{border-bottom:1px solid #eaeaea;border-right:1px solid #eaeaea;}
-
+.main-b .main-b-b ul li .t1 p i{display:inline-block;background:#ff4400;color:#fff;line-height: 20px;cursor: pointer;float:right;}
 .main-b .main-b-b ul li:nth-child(1){border-left:1px solid #eaeaea;}
 .main-b .main-b-b ul li:nth-child(5){width:238px;}
 .main-b .main-b-b ul li:nth-child(6){border-left:1px solid #eaeaea;}

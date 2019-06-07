@@ -102,20 +102,20 @@ class Search{
 		this.txt[0].oninput = function(){
 			that.value = this.value
 			that.search()
-			
 		}
 		this.txt.click(function(){
 //			var e = eve || window.event;
-//			var code = e.keyCode || e.which
-//			console.log(code)
-			that.oul[0].style.display = "block"
-//			if(){
-//				
-//			}
+//			var code = e.keyCode || e.which;
+			that.oul[0].style.display = "block";
+			
 		})
+		
 		this.txt.blur(function(){
 			that.oul[0].style.display = "none"
 		})
+		
+		
+		
 	}	
 	search(){
 		var that = this;
@@ -273,7 +273,9 @@ class Banner{
 class Shop{
 	constructor(options){
 		this.url = options.url;
+		this.url1 = options.url1;
 		this.c3 = options.c3;
+		this.main = options.main;
 		this.addEvent()
 		this.ajax()
 	}
@@ -284,6 +286,13 @@ class Shop{
 			success:function(res){
 				that.res = res;
 				that.display()
+			}
+		});
+		$.ajax({
+			url:this.url1,
+			success:function(res){
+				that.res = res;
+				that.display1()
 			}
 		});
 	}
@@ -305,8 +314,25 @@ class Shop{
 						</div>	
 					</li>`
 		}
-//		$(".main-t").children(".c3").append("<ul>")
 		$(".main-t").children(".c3").children("ul").html(str)
+		
+	}
+	display1(){
+		var str = "";
+		for(var i=0;i<this.res.length;i++){
+			str += `<li index="${this.res[i].goodsid}">
+						<div class="t1">
+							<a href="#"><img data-src="${this.res[i].src}"></a>
+							<p>
+								<span>${this.res[i].price}</span>
+								<s>${this.res[i].xuni}</s>
+								<i class="set">加入购物车</i>
+							</p>
+							<b>${this.res[i].name}</b>
+						</div>
+					</li>`
+		}
+		this.main.html(str)
 	}
 	addEvent(){
 		var that = this;
@@ -318,6 +344,7 @@ class Shop{
 				that.setCookie()
 			}
 		})
+		
 	}
 	setCookie(){
 		this.goods = localStorage.getItem("shangpin");
@@ -344,10 +371,13 @@ class Shop{
 		}
 		localStorage.setItem("shangpin",JSON.stringify(this.goods))
 	}
+	
 }
 new Shop({
 	url:"http://localhost/shop/public/one.json",
-	c3:$(".main-t").children(".c3").children("ul")
+	url1:"http://localhost/shop/public/one1.json",
+	c3:$(".main-t").children(".c3").children("ul"),
+	main:$(".main-b-b").children("ul")
 })
 	
 //回到顶部
