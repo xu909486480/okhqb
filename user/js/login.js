@@ -7,6 +7,7 @@ class Deside{
 		this.pass = options.pass;
 		this.pass2 = options.pass2;
 		this.check = options.check;
+		this.addEvent()
 		this.init()
 	}
 	init(){
@@ -104,6 +105,9 @@ class Deside{
 		setInterval(()=>{
 			location.href = "user.html"
 		},300)
+	}
+	addEvent(){
+		
 	}
 }
 

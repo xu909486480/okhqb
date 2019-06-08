@@ -53,7 +53,51 @@ class Cookie{
 		})
 	}
 }
-
+//判断会员用户名
+class Index{
+	constructor(options){
+		this.ospan = options.ospan
+		this.oi = options.oi
+		this.ob = options.ob
+		this.oul = options.oul
+		this.init()
+		this.addEvent()
+	}
+	addEvent(){
+		var that = this
+		this.oi.click(function(){
+			for(var i=0;i<that.user.length;i++){
+				if(that.name == that.user[i].u){
+					that.oul.css("display","block");
+					that.ob.css("display","none");
+					localStorage.setItem("user",JSON.stringify(that.user));
+					return;
+				}
+			}
+		})
+	}
+	init(){
+		this.user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : [];
+		this.check()
+	}
+	check(){
+		for(var i=0;i<this.user.length;i++){
+			if(this.user[i].onoff == 1){
+				this.oul[0].display = "none"
+				this.ob[0].display = "block"
+				this.ospan[0].innerHTML = this.user[i].u
+				this.name = this.user[i].u
+				return;
+			}
+		}
+	}
+}
+new Index({
+	ospan:$(".top-c").children("span"),
+	oi:$(".top-c").children("i"),
+	ob:$(".top-c"),
+	oul:$(".top-l")
+})
 //头部的JS------------------------------------------
 new Cookie({
 	info1:$(".top-l"),
@@ -405,10 +449,7 @@ class Floor{
 		this.oli = options.oli;
 		this.scrollT = options.scrollT
 		this.clientT = options.clientT
-//		console.log($("#link").find(".active"))
 		this.init()
-//		console.log(this.scrollT)
-//		console.log(this.clientT)
 	}
 	init(){
 		var that = this;

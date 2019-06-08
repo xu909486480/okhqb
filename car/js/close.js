@@ -3,8 +3,10 @@ class Car{
 		this.url = options.url;
 		this.url1 = options.url1;
 		this.tbody = options.tbody;
+		this.os = options.os;
 		this.init()
 		this.addEvent()
+
 	}
 	init(){
 		var that = this;
@@ -14,12 +16,15 @@ class Car{
 				that.res = res
 				that.getCookie()
 				that.display()
+				that.addset()
+				
 			}
 		});
 		
 	}
 	getCookie(){
-		this.goods = JSON.parse(localStorage.getItem("shangpin"))
+		this.goods = localStorage.getItem("shangpin") ? JSON.parse(localStorage.getItem("shangpin")) : [];
+//		this.goods = JSON.parse(localStorage.getItem("shangpin"))
 	}
 	display(){
 		var str = "";
@@ -30,7 +35,7 @@ class Car{
 					<td>
 						<div class="l">
 							<input type="checkbox">
-							<a href="#"><img src="${this.res[i].src}"></a>
+							<a href="#"><img data-src="${this.res[i].src}"></a>
 							<p>
 								<a href="#">${this.res[i].name}</a>
 								<span>32G 金色</span>
@@ -144,9 +149,18 @@ class Car{
 		}
 		localStorage.setItem("shangpin",JSON.stringify(this.goods))
 	}
+	addset(){
+		var num = 0
+		for(var i=0;i<this.goods.length;i++){
+			num += parseInt(this.goods[i].num)
+		}
+		this.os[0].innerHTML = num;
+
+	}
 }
 new Car({
 	url:"http://localhost/shop/public/one.json",
 	url1:"http://localhost/shop/public/one1.json",
-	tbody:$(".tab").children("tbody")
+	tbody:$(".tab").children("tbody"),
+	os:$(".main-c2").children("span").children("s")
 })
