@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+
+.margin{width:1200px; margin:0 auto;}
+#header{height:120px;background:#ccc;}
+body{margin-bottom:65px;}
+#main{height:100%;}
+#main .main-t{}
+#main .main-t img{display:block;margin:0 auto;margin-top:34px;}
+
+.main-c1{height:800px;}
+.tab{width:100%;height:36px;margin-top:40px;}
+.tab thead{border:1px solid #ebf3ff;border-left:2px solid #005bf3;}
+.tab thead tr{display: flex;height:36px;line-height: 36px;}
+.tab thead tr th{font-size: 14px;}
+.tab thead tr th:nth-child(1){flex:3;}
+.tab thead tr th:nth-child(2){flex:1;}
+.tab thead tr th:nth-child(3){flex:1;}
+.tab thead tr th:nth-child(4){flex:1;}
+.tab thead tr th:nth-child(5){flex:1;}
+.tab tbody{display:block;width:100%;height:82px;border:1px solid #dbe7e7;margin-left:-1px;}
+
+.tab{width:1200px;}
+.tab tbody{border:1px solid #dbe7e7;height:120px;}
+.tab tbody tr{height:120px;border:1px solid #ccc;}
+.tab tbody tr td{width:400px;}
+.tab tbody tr td .l{display: flex;}
+.tab tbody tr td .l input{margin:30px 20px;}
+.tab tbody tr td .l a{padding:10px;border:1px solid #ccc;}
+.tab tbody tr td .l a img{width:60px;height:60px;}
+.tab tbody tr td .l p{width:190px;}
+.tab tbody tr td .l p a{display:block;border:0;width:190px;}
+.tab tbody tr td .l p span{color:#ccc;margin-left:10px;}
+
+.tab tbody tr td .c1{margin-left:226px;}
+.tab tbody tr td .c1 p{margin-left:10px;}
+.tab tbody tr td .c1 a{display: block;width:44px;height:22px;background:#fea201;color:#fff;text-align: center;line-height: 22px;margin-left:6px;}
+.tab tbody tr td .c2{margin-left:80px;}
+.tab tbody tr td .c2 input{width:80px;}
+.tab tbody tr td .c3{margin-left:40px;}
+.tab tbody tr td .c3 span{color:#f00;}
+.tab tbody tr td .r{margin-left:60px;}
+
+.main-c2{width:1198px;height:65px;border:1px solid #d0d2d6;background:#fafafa;line-height: 65px;position: fixed;bottom:0;}
+.main-c2 a{color:#232323;margin-left:30px;}
+.main-c2 span{margin-left:592px;}
+.main-c2 h3{width:230px;height: 65px;background:#f91d32;color:#fff;font-size: 20px;text-align: center;float:right;margin-left:80px;cursor: pointer;}
+.main-c2 span s{text-decoration:none;color:#f20;margin:0 4px;}
+
+
+
+
+
